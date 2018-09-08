@@ -3,6 +3,8 @@
 * 开启后对app运行并无大的影响，方便在测试功能的同时检测期间代码中block强引用self内存泄漏情况
 
 ## Usage
-编写中
 ~~~~
+
+    [[BlockRetainSelf sharedChecker] addPrefix:@"XY"];
+    [[BlockRetainSelf sharedChecker] handleBlockchecking];
 ~~~~

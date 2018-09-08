@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "blockRetainSelf"
-  s.version      = "0.0.1"
+  s.version      = "0.0.3"
   s.summary      = "block retain self check for iOS"
   s.description  = <<-DESC
 			block retain self check for iOS

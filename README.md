@@ -4,7 +4,7 @@
 
 ## Usage
 ~~~~
-
-    [[BlockRetainSelf sharedChecker] addPrefix:@"XY"];
-    [[BlockRetainSelf sharedChecker] handleBlockchecking];
+//指定想要检测的类名前缀 比如Namespace
+[[BlockRetainSelf sharedChecker] addPrefix:@"Namespace"];
+[[BlockRetainSelf sharedChecker] handleBlockchecking];
 ~~~~

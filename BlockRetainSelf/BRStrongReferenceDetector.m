@@ -5,7 +5,7 @@
 //  Created by 方阳 on 2018/7/30.
 //  Copyright © 2018年 yy. All rights reserved.
 //
-
+#ifdef DEBUG
 #import "BRStrongReferenceDetector.h"
 #import <objc/runtime.h>
 
@@ -47,3 +47,4 @@ static void byref_dispose_nop(struct _block_byref_block *param) {}
 }
 
 @end
+#endif

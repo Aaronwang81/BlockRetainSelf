@@ -93,7 +93,7 @@ static thread_t brsmainthread = 0;
 - (NSString*)getClassNameAtFrame:(NSInteger)index;
 {
     thread_t curthread = mach_thread_self();// 或者 [self machthreadOf:[NSThread currentThread]]
-    uintptr_t bt[8];
+    uintptr_t bt[index+2];
     int i = 0;
     _STRUCT_MCONTEXT context;
     mach_msg_type_number_t statecount = BRS_THREAD_STATE_COUNT;
@@ -108,15 +108,24 @@ static thread_t brsmainthread = 0;
     CHECKANDRET(bt[0], nil);
     BRSStackFrameEntry entry = {0};
     uint64_t fp = context.__ss.__fp;
-    for( --i; i < 7 ; ++i )
+    for( --i; i < index+1 ; ++i )
     {
         brs_mach_copyFramePointer((void*)fp, &entry, sizeof(entry));
         bt[i+1] = entry.return_address;
         fp = (uint64_t)entry.previous;
     }
     Dl_info dlinfo;
-    uint32_t imgindex = UINT_MAX;
-    dladdr(bt[7], &dlinfo);
+//    uint32_t imgindex = UINT_MAX;
+    dladdr((void*)bt[index+1], &dlinfo);
+    CHECKANDRET(dlinfo.dli_fname, nil);
+    NSString* stackline = [NSString stringWithUTF8String:dlinfo.dli_fname];
+    NSRange range = [stackline rangeOfString:@"-["];
+    if( range.location != NSNotFound )
+    {
+        NSRange whiterange = [stackline rangeOfString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(range.location, stackline.length-range.location)];
+        NSString* clsname = [stackline substringWithRange:NSMakeRange(range.location+2, whiterange.location-range.location-2)];
+        return clsname;
+    }
 //    //get image index
 //    const uint32_t imgCount = _dyld_image_count();
 //    const struct mach_header* header = NULL;

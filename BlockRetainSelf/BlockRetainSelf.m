@@ -225,28 +225,29 @@ static NSIndexSet *_GetBlockStrongLayout(void *block)
             NSError* error = nil;
             [cls hookSelector_BRSIntercepter:selector withBlock:[^(id block){
                 strongifySelf
-                [[BRSStackChecker sharedChecker] getClassNameAtFrame:7];
+                NSString* clsname = [[BRSStackChecker sharedChecker] getClassNameAtFrame:10];
                 CHECK(block);
                 NSArray* origretains = [self blockRetains:block];
                 CHECK(origretains.count);
                 NSArray* retains = [self containConcernedClass:origretains];
                 [origretains release];
                 CHECK(retains.count);
-                NSArray<NSString*>* stack = [NSThread callStackSymbols];
-                NSString* stackline = stack[7];
-                NSRange range = [stackline rangeOfString:@"-["];
-                if( range.location != NSNotFound )
+                for( id obj in retains)
                 {
-                    NSRange whiterange = [stackline rangeOfString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(range.location, stackline.length-range.location)];
-                    NSString* clsname = [stackline substringWithRange:NSMakeRange(range.location+2, whiterange.location-range.location-2)];
-                    for( id obj in retains)
+                    if( [obj class] == NSClassFromString(clsname) )
                     {
-                        if( [obj class] == NSClassFromString(clsname) )
-                        {
-                            [[NSException exceptionWithName:@"block retain self" reason:stackline userInfo:nil] raise];
-                        }
+                        [[NSException exceptionWithName:@"block retain self" reason:nil userInfo:nil] raise];
                     }
                 }
+//                NSArray<NSString*>* stack = [NSThread callStackSymbols];
+//                NSString* stackline = stack[7];
+//                NSRange range = [stackline rangeOfString:@"-["];
+//                if( range.location != NSNotFound )
+//                {
+//                    NSRange whiterange = [stackline rangeOfString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(range.location, stackline.length-range.location)];
+//                    NSString* clsname = [stackline substringWithRange:NSMakeRange(range.location+2, whiterange.location-range.location-2)];
+//
+//                }
                 [retains release];
             } copy] error:&error];
         }

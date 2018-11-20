@@ -118,7 +118,7 @@ static thread_t brsmainthread = 0;
 //    uint32_t imgindex = UINT_MAX;
     dladdr((void*)bt[index+1], &dlinfo);
     CHECKANDRET(dlinfo.dli_fname, nil);
-    NSString* stackline = [NSString stringWithUTF8String:dlinfo.dli_fname];
+    NSString* stackline = [NSString stringWithUTF8String:dlinfo.dli_sname];
     NSRange range = [stackline rangeOfString:@"-["];
     if( range.location != NSNotFound )
     {

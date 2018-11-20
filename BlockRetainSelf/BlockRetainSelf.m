@@ -11,6 +11,7 @@
 #import "BRSIntercepter.h"
 #import "BRSBase.h"
 #import <objc/runtime.h>
+#import "BRSStackChecker.h"
 
 #define weakifySelf  __weak __typeof(&*self)weakSelf = self;
 #define strongifySelf __strong __typeof(&*weakSelf)self = weakSelf;
@@ -224,6 +225,7 @@ static NSIndexSet *_GetBlockStrongLayout(void *block)
             NSError* error = nil;
             [cls hookSelector_BRSIntercepter:selector withBlock:[^(id block){
                 strongifySelf
+                [[BRSStackChecker sharedChecker] getClassNameAtFrame:7];
                 CHECK(block);
                 NSArray* origretains = [self blockRetains:block];
                 CHECK(origretains.count);

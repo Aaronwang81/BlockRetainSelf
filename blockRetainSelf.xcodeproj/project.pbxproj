@@ -11,6 +11,7 @@
 		C0382AEB210EC097004D3FA6 /* BlockRetainSelf.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C0382AE8210EC097004D3FA6 /* BlockRetainSelf.h */; };
 		C0382AF3210EC27D004D3FA6 /* BRStrongReferenceDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = C0382AF2210EC27D004D3FA6 /* BRStrongReferenceDetector.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C0382AF6210EEC7C004D3FA6 /* BRSIntercepter.m in Sources */ = {isa = PBXBuildFile; fileRef = C0382AF5210EEC7C004D3FA6 /* BRSIntercepter.m */; };
+		C07C32C221A405E6007D48FA /* BRSStackChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = C07C32C121A405E6007D48FA /* BRSStackChecker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,8 @@
 		C0382AF4210EEC7C004D3FA6 /* BRSIntercepter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRSIntercepter.h; sourceTree = "<group>"; };
 		C0382AF5210EEC7C004D3FA6 /* BRSIntercepter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BRSIntercepter.m; sourceTree = "<group>"; };
 		C0382AF7210FFAAC004D3FA6 /* BRSBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRSBase.h; sourceTree = "<group>"; };
+		C07C32C021A405E6007D48FA /* BRSStackChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRSStackChecker.h; sourceTree = "<group>"; };
+		C07C32C121A405E6007D48FA /* BRSStackChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BRSStackChecker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,8 @@
 				C0382AF4210EEC7C004D3FA6 /* BRSIntercepter.h */,
 				C0382AF5210EEC7C004D3FA6 /* BRSIntercepter.m */,
 				C0382AF7210FFAAC004D3FA6 /* BRSBase.h */,
+				C07C32C021A405E6007D48FA /* BRSStackChecker.h */,
+				C07C32C121A405E6007D48FA /* BRSStackChecker.m */,
 			);
 			path = BlockRetainSelf;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 			files = (
 				C0382AF6210EEC7C004D3FA6 /* BRSIntercepter.m in Sources */,
 				C0382AF3210EC27D004D3FA6 /* BRStrongReferenceDetector.m in Sources */,
+				C07C32C221A405E6007D48FA /* BRSStackChecker.m in Sources */,
 				C0382AEA210EC097004D3FA6 /* BlockRetainSelf.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

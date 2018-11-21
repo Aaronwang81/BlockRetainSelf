@@ -115,9 +115,15 @@ static thread_t brsmainthread = 0;
         fp = (uint64_t)entry.previous;
     }
     Dl_info dlinfo;
+//    NSString* stack = @"";
+//    for( int i = 0; i< index +2 ; ++i )
+//    {
+//        dladdr((void*)bt[i], &dlinfo);
+//        stack = [NSString stringWithFormat:@"%@%s    %s\n",stack,dlinfo.dli_fname,dlinfo.dli_sname];
+//    }
 //    uint32_t imgindex = UINT_MAX;
     dladdr((void*)bt[index+1], &dlinfo);
-    CHECKANDRET(dlinfo.dli_fname, nil);
+    CHECKANDRET(dlinfo.dli_sname, nil);
     NSString* stackline = [NSString stringWithUTF8String:dlinfo.dli_sname];
     NSRange range = [stackline rangeOfString:@"-["];
     if( range.location != NSNotFound )

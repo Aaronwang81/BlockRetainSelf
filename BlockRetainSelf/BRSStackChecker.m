@@ -107,7 +107,7 @@ static thread_t brsmainthread = 0;
     }
     CHECKANDRET(bt[0], nil);
     BRSStackFrameEntry entry = {0};
-    uint64_t fp = context.__ss.__fp;
+    uint64_t fp = context.__ss.BRS_FRAME_POINTER;
     for( --i; i < index+1 ; ++i )
     {
         brs_mach_copyFramePointer((void*)fp, &entry, sizeof(entry));

@@ -115,6 +115,7 @@ static thread_t brsmainthread = 0;
         fp = (uint64_t)entry.previous;
     }
     Dl_info dlinfo;
+    dlinfo.dli_sname = NULL;
 //    NSString* stack = @"";
 //    for( int i = 0; i< index +2 ; ++i )
 //    {

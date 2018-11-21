@@ -14,6 +14,7 @@
 
 - (void)addPrefix:(NSString*)prefix;
 - (void)addClassname:(NSString*)clsname;
+- (void)addExcludedClassname:(NSString*)clsname;
 - (void)handleBlockchecking;
 
 @end

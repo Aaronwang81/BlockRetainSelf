@@ -69,7 +69,7 @@ static NSIndexSet *_GetBlockStrongLayout(void *block)
 @interface BlockRetainSelf()
 
 @property (nonatomic,strong) NSMutableSet* prefixes;
-@property (nonatomic,strong) NSMutableSet* excludedprefixes;
+@property (nonatomic,strong) NSMutableSet* excludedClass;
 @property (nonatomic,strong) NSMutableSet* classnames;
 
 @end
@@ -91,7 +91,7 @@ static NSIndexSet *_GetBlockStrongLayout(void *block)
     self = [super init];
     if (self) {
         _prefixes = [NSMutableSet new];
-        _excludedprefixes = [NSMutableSet new];
+        _excludedClass = [NSMutableSet new];
         _classnames = [NSMutableSet new];
     }
     return self;
@@ -151,9 +151,9 @@ static NSIndexSet *_GetBlockStrongLayout(void *block)
     [_prefixes addObject:prefix];
 }
 
-- (void)excludePrefix:(NSString*)prefix;
+- (void)addExcludedClassname:(NSString*)clsname;
 {
-    [_excludedprefixes addObject:prefix];
+    [_excludedClass addObject:clsname];
 }
 
 - (void)addClassname:(NSString*)clsname;
@@ -196,6 +196,7 @@ static NSIndexSet *_GetBlockStrongLayout(void *block)
             }
         }
         CHECKANDCONTINUE(hit);
+        CHECKANDCONTINUE(![_excludedClass containsObject:classname]);
         
         [self handleBlockCheckingForCls:cls];
     }

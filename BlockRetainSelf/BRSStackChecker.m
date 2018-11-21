@@ -126,10 +126,15 @@ static thread_t brsmainthread = 0;
     CHECKANDRET(dlinfo.dli_sname, nil);
     NSString* stackline = [NSString stringWithUTF8String:dlinfo.dli_sname];
     NSRange range = [stackline rangeOfString:@"-["];
-    if( range.location != NSNotFound )
+    if( stackline && range.location != NSNotFound )
     {
         NSRange whiterange = [stackline rangeOfString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(range.location, stackline.length-range.location)];
         NSString* clsname = [stackline substringWithRange:NSMakeRange(range.location+2, whiterange.location-range.location-2)];
+        range = [clsname rangeOfString:@"("];
+        if( range.location != NSNotFound )
+        {
+            clsname = [clsname substringToIndex:range.location];
+        }
         return clsname;
     }
 //    //get image index

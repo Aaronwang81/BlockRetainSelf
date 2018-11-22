@@ -230,9 +230,9 @@ static NSIndexSet *_GetBlockStrongLayout(void *block)
                 CHECK(block);
                 NSArray* origretains = [self blockRetains:block];
                 CHECK(origretains.count);
-                NSArray* retains = [self containConcernedClass:origretains];
-                [origretains release];
-                CHECK(retains.count);
+                NSArray* retains = origretains;//[self containConcernedClass:origretains];
+                //                [origretains release];
+                //                CHECK(retains.count);
                 for( id obj in retains)
                 {
                     if( [obj class] == NSClassFromString(clsname) )
